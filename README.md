@@ -6,6 +6,10 @@
 
 Confira o protótipo do projeto no [Figma](https://www.figma.com/exemplo-do-seu-prototipo).
 
+&nbsp;
+
+### 📚 [Documentação](./documentacao.md)
+
 &nbsp;&nbsp;
 
 
