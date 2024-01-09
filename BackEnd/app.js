@@ -12,8 +12,7 @@ app.use(cors());
 
 const upload = multer({ dest: 'uploads/' });
 
-
-app.post('/upload', upload.single('file'), (req, res) => {
+app.post('/api/stats', upload.single('file'), (req, res) => {
     console.log('Recebeu a planilha com sucesso!');
     
     try {

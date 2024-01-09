@@ -49,7 +49,7 @@ export default {
       const formData = new FormData();
       formData.append('file', this.file);
 
-      this.$axios.post('http://localhost:3000/upload', formData)
+      this.$axios.post('http://localhost:3000/api/stats', formData)
         .then(response => {
           // Salvando cada propriedade separadamente no localStorage
           localStorage.setItem('ChurnRate', JSON.stringify(response.data.ChurnRate));
