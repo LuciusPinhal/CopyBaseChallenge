@@ -7,7 +7,7 @@
       <h2>MRR: {{ result.mrr }}</h2>
       <h2>Churn Rate: {{ result.churnRate }}</h2>
 
-      <table v-if="result.receitasMensais.length > 0">
+      <table v-if="result.receitasMensais && result.receitasMensais.length > 0">
         <thead>
           <tr>
             <th>Assinante</th>
@@ -25,11 +25,16 @@
         <p>Nenhuma receita mensal disponível.</p>
       </div>
     </div>
+
+
   </div>
+
 </template>
 
 <script>
+
 export default {
+  name: 'HelloWorld',
   data() {
     return {
       file: null,
@@ -40,18 +45,29 @@ export default {
     handleFileChange(event) {
       this.file = event.target.files[0];
     },
-    uploadFile() {
+      uploadFile() {
       const formData = new FormData();
       formData.append('file', this.file);
 
       this.$axios.post('http://localhost:3000/upload', formData)
         .then(response => {
+          // Salvando cada propriedade separadamente no localStorage
+          localStorage.setItem('ChurnRate', JSON.stringify(response.data.ChurnRate));
+          localStorage.setItem('ChurnRateMes', JSON.stringify(response.data.ChurnRateMes));
+          localStorage.setItem('estatisticasPorMes', JSON.stringify(response.data.estatisticasPorMes));
+          localStorage.setItem('mrr', JSON.stringify(response.data.mrr));
+          localStorage.setItem('receitasMensais', JSON.stringify(response.data.receitasMensais));
+          localStorage.setItem('resultadoAgrupadoPorMes', JSON.stringify(response.data.resultadoAgrupadoPorMes));
+
+          // Atualizando this.result com os dados do servidor
           this.result = response.data;
         })
         .catch(error => {
           console.error(error);
         });
     },
+  
   },
+
 };
 </script>

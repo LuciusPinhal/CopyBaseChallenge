@@ -1,26 +1,51 @@
 <template>
-  <!-- <img alt="Vue logo" src="./assets/logo.jpg"> -->
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <NavbarMenu /> 
+    <router-view />
+    <FooterSection />
+
+  </div>
 </template>
-
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+ import NavbarMenu from "./components/NavbarMenu.vue";
+import FooterSection from "./components/FooterSection.vue";
 
-export default {
-  name: 'App',
+ export default {
+
   components: {
-    HelloWorld
+    NavbarMenu,
+    FooterSection,
+  },
+  data() {
+    return {
+      logo_src: require('@/Img/CopyBase.jpg'),
+      app_name: "Make Your Burger"
+    }
   }
 }
+
+
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+* {
+  font-family: Helvetica;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+
+}
+
+.main-container {
+  margin: 50px;
+  min-height: 250px;
+}
+
+h1 {
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  font-size: 42px;
+  margin-bottom: 30px;
+  color: #222;
+
 }
 </style>
