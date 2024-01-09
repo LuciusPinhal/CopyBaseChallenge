@@ -7,7 +7,7 @@
       <h2>MRR: {{ result.mrr }}</h2>
       <h2>Churn Rate: {{ result.churnRate }}</h2>
 
-      <table v-if="result.receitasMensais && result.receitasMensais.length > 0">
+      <table v-if="result.recipesMonthly && result.recipesMonthly.length > 0">
         <thead>
           <tr>
             <th>Assinante</th>
@@ -15,7 +15,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(receita, index) in result.receitasMensais" :key="index">
+          <tr v-for="(receita, index) in result.recipesMonthly" :key="index">
             <td>{{ index + 1 }}</td>
             <td>{{ receita.toFixed(2) }}</td>
           </tr>
@@ -54,10 +54,10 @@ export default {
           // Salvando cada propriedade separadamente no localStorage
           localStorage.setItem('ChurnRate', JSON.stringify(response.data.ChurnRate));
           localStorage.setItem('ChurnRateMes', JSON.stringify(response.data.ChurnRateMes));
-          localStorage.setItem('estatisticasPorMes', JSON.stringify(response.data.estatisticasPorMes));
+          localStorage.setItem('estatisticasPorMes', JSON.stringify(response.data.statisticsAmonth));
           localStorage.setItem('mrr', JSON.stringify(response.data.mrr));
-          localStorage.setItem('receitasMensais', JSON.stringify(response.data.receitasMensais));
-          localStorage.setItem('resultadoAgrupadoPorMes', JSON.stringify(response.data.resultadoAgrupadoPorMes));
+          localStorage.setItem('recipesMonthly', JSON.stringify(response.data.recipesMonthly));
+          localStorage.setItem('resultadoAgrupadoPorMes', JSON.stringify(response.data.resultGroupedPermonth));
 
           // Atualizando this.result com os dados do servidor
           this.result = response.data;
@@ -66,7 +66,7 @@ export default {
           console.error(error);
         });
     },
-  
+
   },
 
 };

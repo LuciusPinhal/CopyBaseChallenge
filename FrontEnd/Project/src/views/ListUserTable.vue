@@ -15,7 +15,7 @@
                 </tr>
             </thead>
             <tbody v-if="tableData">
-                <tr v-for="(user, index) in usuariosPorMes" :key="index">
+                <tr v-for="(user, index) in usersAmonth" :key="index">
                     <td>{{ user['ID assinante'] }}</td>
                     <td>{{ user.periodicidade }}</td>
                     <td>{{ user['quantidade cobranças'] }}</td>
@@ -37,7 +37,7 @@ export default {
     data() {
         return {
             resultadoAgrupadoPorMes: {},
-            usuariosPorMes: [],
+            usersAmonth: [],
             tableData: false
         };
     },
@@ -52,18 +52,18 @@ export default {
                 try {
                     const parsedData = JSON.parse(dataAsString);
 
-                    if (parsedData && parsedData.UsuariosPorMes) {
-                        const usuariosPorMesArray = Object.values(parsedData.UsuariosPorMes).flat();
+                    if (parsedData && parsedData.UsersAmonth) {
+                        const usersAmonthArray = Object.values(parsedData.UsersAmonth).flat();
 
-                        if (usuariosPorMesArray.length > 0) {
-                            this.usuariosPorMes = usuariosPorMesArray;
+                        if (usersAmonthArray.length > 0) {
+                            this.usersAmonth = usersAmonthArray;
                             this.tableData = true;
                         } else {
-                            console.warn('Array de usuariosPorMes está vazio.');
+                            console.warn('Array de usersAmonth está vazio.');
                             this.tableData = false;
                         }
 
-                        console.log('Dados do localStorage carregados com sucesso:', this.usuariosPorMes);
+                        console.log('Dados do localStorage carregados com sucesso:', this.usersAmonth);
                     } else {
                         console.warn('Dados no formato esperado não encontrados no localStorage.');
                         this.tableData = false;
