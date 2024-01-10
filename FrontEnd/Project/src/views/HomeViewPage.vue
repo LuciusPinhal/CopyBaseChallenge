@@ -2,7 +2,7 @@
   <div>
     <div class="main-container">
       <div class="form-header">
-        <h1>Dashborad</h1>
+        <h1>Dashboard</h1>
         <p>Este é um texto provisório. Substitua-o pelo seu conteúdo real.</p>
       </div>
       <FormMetric />
@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import FormMetric from '../components/FormMetric.vue'
+import FormMetric from '../components/template/FormMetric.vue'
 export default {
   name: 'HomeViewPage',
   components: {

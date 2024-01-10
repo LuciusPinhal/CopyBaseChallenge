@@ -47,7 +47,7 @@ app.post('/api/stats', upload.single('file'), (req, res) => {
       console.warn("🍷🗿 >> arr:", arr);
 
       const ChurnRate = statistic.calculateChurnRate(sheetData);
-      const ChurnRateMes = statistic.calculateChurnAmonth(sheetData);
+      const ChurnRateAmonth = statistic.calculateChurnAmonth(sheetData);
       const statisticsAmonth = statistic.getStatisticsUsersAmonth(sheetData);
       const resultGroupedPermonth = statistic.groupsubscriptionsAmonth(sheetData);
 
@@ -78,7 +78,7 @@ app.post('/api/stats', upload.single('file'), (req, res) => {
 
       // Retorne os resultados em JSON
       res.json({
-        arr, mrr, ChurnRate, ChurnRateMes, statisticsAmonth, resultGroupedPermonth,
+        arr, mrr, ChurnRate, ChurnRateAmonth, statisticsAmonth, resultGroupedPermonth,
         arpuMonthly, arpuAnnual, totalMonthlyRevenue, totalAnnualRevenue, totalUsers,
         ltvMonthly, ltvAnnual
       });
