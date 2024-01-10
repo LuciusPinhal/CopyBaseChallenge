@@ -41,11 +41,28 @@ app.post('/api/stats', upload.single('file'), (req, res) => {
       });
 
       // Calculos
-      const { mrr, recipesMonthly } = statistic.calculateMRR(sheetData);
+      const mrr = statistic.calculateMRR(sheetData);
+      const arr = statistic.calculateARR(sheetData);
+
+      console.warn("🍷🗿 >> arr:", arr);
+
       const ChurnRate = statistic.calculateChurnRate(sheetData);
       const ChurnRateMes = statistic.calculateChurnAmonth(sheetData);
       const statisticsAmonth = statistic.getStatisticsUsersAmonth(sheetData);
       const resultGroupedPermonth = statistic.groupsubscriptionsAmonth(sheetData);
+
+      const { arpuMonthly, arpuAnnual, totalMonthlyRevenue, totalAnnualRevenue, totalUsers } = statistic.calculateARPU(sheetData);
+      const { ltvMonthly, ltvAnnual } = statistic.calculateLTV(sheetData);
+
+
+      console.log('ARPU Mensal:', arpuMonthly);
+      console.log('ARPU Anual:', arpuAnnual);
+      console.log('Receita Total Mensal:', totalMonthlyRevenue);
+      console.log('Receita Total Anual:', totalAnnualRevenue);
+      console.log('Número Total de Usuários:', totalUsers);
+
+      console.log('LTV Mensal:', ltvMonthly);
+      console.log('LTV Anual:', ltvAnnual);
 
       // Object.keys(resultGroupedPermonth.UsersAmonth).forEach(month => {
       //   console.log(`Usuários em ${month}:`);
@@ -60,7 +77,11 @@ app.post('/api/stats', upload.single('file'), (req, res) => {
       console.log('MRR Calculado:', mrr);
 
       // Retorne os resultados em JSON
-      res.json({ success: true, mrr, recipesMonthly, ChurnRate, ChurnRateMes, statisticsAmonth, resultGroupedPermonth });
+      res.json({
+        arr, mrr, ChurnRate, ChurnRateMes, statisticsAmonth, resultGroupedPermonth,
+        arpuMonthly, arpuAnnual, totalMonthlyRevenue, totalAnnualRevenue, totalUsers,
+        ltvMonthly, ltvAnnual
+      });
     } catch (error) {
       console.error(error);
       res.status(500).json({ error: 'Erro ao processar a planilha' });

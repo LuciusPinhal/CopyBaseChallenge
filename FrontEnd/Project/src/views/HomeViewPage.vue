@@ -2,17 +2,17 @@
   <div>
     <div class="main-container">
       <h1>Container:</h1>
-      <BurgerForm />
+      <FormMetric />
     </div>
   </div>
 </template>
 
 <script>
-import BurgerForm from '../components/HelloWorld.vue'
+import FormMetric from '../components/FormMetric.vue'
 export default {
   name: 'HomeViewPage',
   components: {
-    BurgerForm
+    FormMetric
   }
 }
 </script>

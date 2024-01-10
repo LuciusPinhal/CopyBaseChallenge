@@ -1,37 +1,6 @@
-const months =  [
-  'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
-  'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+const months = [
+    '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'
 ];
-
-function calculateMRR(data) {
-
-    const currentDate = new Date();
-    
-    const assinaturasAtivas = data.filter(line =>
-        line.status === 'Ativa' &&
-        (!line['data cancelamento'] || new Date(line['data cancelamento']) > currentDate) &&
-        new Date(line['data início']) <= currentDate
-    );
-
-    const recipesMonthly = assinaturasAtivas.map(line => {
-
-        const valueNumeric = parseFloat(String(line.valor).replace(',', '.'));
-
-        if (!isNaN(valueNumeric))
-        {
-            const monthlyValue = line.periodicidade === 'Anual' ? valueNumeric / 12 : valueNumeric;
-            return monthlyValue;
-
-        } else {  
-            
-            console.error('Valor inválido:', line.valor);
-            return 0;    
-        }
-    });
-    
-    const mrr = recipesMonthly.reduce((total, receita) => total + receita, 0);
-    return { mrr, recipesMonthly };
-}
 
 function calculateChurnRate(data) {
 
@@ -83,9 +52,6 @@ function calculateChurnAmonth(data) {
         datesLatestBySubscriber[idSubscriber] = dateMostRecent;
         }
     });
-
-    console.log('Datas Mais Recentes por Subscriber:', datesLatestBySubscriber);
-
 
     const churnRateAmonth = {};
     months.forEach(month => {
@@ -222,12 +188,113 @@ function getStatisticsUsersAmonth(data) {
     return statisticsAmonth;
 }
 
+function calculateTotalMonthlyRevenue(assinaturasAtivas) {
+    return assinaturasAtivas.reduce((total, line) => {
+        const valueNumeric = parseFloat(String(line.valor).replace(',', '.'));
+
+        if (!isNaN(valueNumeric)) {
+            return total + (line.periodicidade === 'Mensal' ? valueNumeric : valueNumeric / 12);
+        } else {
+            console.error('Valor inválido:', line.valor);
+            return total;
+        }
+    }, 0);
+}
+
+function calculateTotalAnnualRevenue(assinaturasAtivas) {
+    return assinaturasAtivas.reduce((total, line) => {
+        const valueNumeric = parseFloat(String(line.valor).replace(',', '.'));
+
+        if (!isNaN(valueNumeric) && line.periodicidade === 'Anual') {
+            return total + valueNumeric;
+        } else {
+            return total;
+        }
+    }, 0);
+}
+
+function calculateTotalUsers(assinaturasAtivas) {
+    return assinaturasAtivas.length;
+}
+
+function calculateARPU(data) {
+    const currentDate = new Date();
+
+    const assinaturasAtivas = data.filter(line =>
+        line.status === 'Ativa' &&
+        (!line['data cancelamento'] || new Date(line['data cancelamento']) > currentDate) &&
+        new Date(line['data início']) <= currentDate
+    );
+
+    const totalMonthlyRevenue = calculateTotalMonthlyRevenue(assinaturasAtivas);
+    const totalAnnualRevenue = calculateTotalAnnualRevenue(assinaturasAtivas);
+    const totalUsers = calculateTotalUsers(assinaturasAtivas);
+
+    const arpuMonthly = totalUsers > 0 ? totalMonthlyRevenue / totalUsers : 0;
+    const arpuAnnual = totalUsers > 0 ? totalAnnualRevenue / totalUsers : 0;
+
+    return { arpuMonthly, arpuAnnual, totalMonthlyRevenue, totalAnnualRevenue, totalUsers };
+}
+
+function calculateMRR(data) {
+    const currentDate = new Date();
+
+    const assinaturasAtivas = data.filter(line =>
+        line.status === 'Ativa' &&
+        (!line['data cancelamento'] || new Date(line['data cancelamento']) > currentDate) &&
+        new Date(line['data início']) <= currentDate
+    );
+
+    const mrr = assinaturasAtivas.map(line => {
+        const valueNumeric = parseFloat(String(line.valor).replace(',', '.'));
+
+        if (!isNaN(valueNumeric)) {
+            return line.periodicidade === 'Anual' ? valueNumeric / 12 : valueNumeric;
+        } else {  
+            console.error('Valor inválido:', line.valor);
+            return 0;
+        }
+    });
+
+    return mrr;
+}
+
+function calculateARR(data) {
+    const currentDate = new Date();
+
+    const assinaturasAtivas = data.filter(line =>
+        line.status === 'Ativa' &&
+        (!line['data cancelamento'] || new Date(line['data cancelamento']) > currentDate) &&
+        new Date(line['data início']) <= currentDate
+    );
+
+    const totalAnnualRevenue = calculateTotalAnnualRevenue(assinaturasAtivas);
+    const totalUsers = calculateTotalUsers(assinaturasAtivas);
+
+    const arr = totalUsers > 0 ? totalAnnualRevenue / totalUsers : 0;
+
+    return arr;
+}
+
+function calculateLTV(data) {
+    const { arpuMonthly, arpuAnnual } = calculateARPU(data);
+    const churnRate = calculateChurnRate(data);
+
+    const ltvMonthly = churnRate !== 0 ? arpuMonthly / churnRate : 0;
+    const ltvAnnual = churnRate !== 0 ? arpuAnnual / churnRate : 0;
+
+    return { ltvMonthly, ltvAnnual };
+}
+
 module.exports = {
-   calculateMRR,
-   calculateChurnRate,
-   calculateChurnAmonth,
-   excelDateToJSDate,
-   groupsubscriptionsAmonth,
-   getStatisticsUsersAmonth
+    calculateChurnRate,
+    calculateChurnAmonth,
+    excelDateToJSDate,
+    groupsubscriptionsAmonth,
+    getStatisticsUsersAmonth,
+    calculateARPU,
+    calculateARR,
+    calculateLTV,
+    calculateMRR
 
 };

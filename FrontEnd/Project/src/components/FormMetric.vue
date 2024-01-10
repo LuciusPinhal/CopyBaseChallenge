@@ -4,10 +4,10 @@
     <button @click="uploadFile">Enviar</button>
 
     <div v-if="result">
-      <h2>MRR: {{ result.mrr }}</h2>
-      <h2>Churn Rate: {{ result.churnRate }}</h2>
+      <h2>receital anual: {{ result.arr }}</h2>
+      <h2>Churn Rate: {{ result.ChurnRate }}</h2>
 
-      <table v-if="result.recipesMonthly && result.recipesMonthly.length > 0">
+      <table v-if="result.mrr && result.mrr.length > 0">
         <thead>
           <tr>
             <th>Assinante</th>
@@ -15,7 +15,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(receita, index) in result.recipesMonthly" :key="index">
+          <tr v-for="(receita, index) in result.mrr" :key="index">
             <td>{{ index + 1 }}</td>
             <td>{{ receita.toFixed(2) }}</td>
           </tr>
@@ -34,7 +34,7 @@
 <script>
 
 export default {
-  name: 'HelloWorld',
+  name: 'FormMetric',
   data() {
     return {
       file: null,
@@ -52,12 +52,23 @@ export default {
       this.$axios.post('http://localhost:3000/api/stats', formData)
         .then(response => {
           // Salvando cada propriedade separadamente no localStorage
+          localStorage.setItem('Receita Recorrente Anual-ARR', JSON.stringify(response.data.arr));
+          localStorage.setItem('Receita Recorrente Mensal-MRR', JSON.stringify(response.data.mrr));
           localStorage.setItem('ChurnRate', JSON.stringify(response.data.ChurnRate));
           localStorage.setItem('ChurnRateMes', JSON.stringify(response.data.ChurnRateMes));
           localStorage.setItem('estatisticasPorMes', JSON.stringify(response.data.statisticsAmonth));
-          localStorage.setItem('mrr', JSON.stringify(response.data.mrr));
-          localStorage.setItem('recipesMonthly', JSON.stringify(response.data.recipesMonthly));
           localStorage.setItem('resultadoAgrupadoPorMes', JSON.stringify(response.data.resultGroupedPermonth));
+
+          localStorage.setItem('Receita Média por Usuário  Mensal', JSON.stringify(response.data.arpuMonthly));
+          localStorage.setItem('Receita Média por Usuário Anual', JSON.stringify(response.data.arpuAnnual));
+          localStorage.setItem('Receita Total Mensal', JSON.stringify(response.data.totalMonthlyRevenue));
+          localStorage.setItem('Receita Total Anual', JSON.stringify(response.data.totalAnnualRevenue));
+          localStorage.setItem('Número Total de Usuários', JSON.stringify(response.data.totalUsers));
+          localStorage.setItem('Valor do Tempo de Vida do Cliente Mensal', JSON.stringify(response.data.ltvMonthly));
+          localStorage.setItem('Valor do Tempo de Vida do Cliente Anual', JSON.stringify(response.data.ltvAnnual));
+   
+                               
+
 
           // Atualizando this.result com os dados do servidor
           this.result = response.data;
