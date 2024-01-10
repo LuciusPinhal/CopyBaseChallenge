@@ -1,7 +1,10 @@
 <template>
   <div>
     <div class="main-container">
-      <h1>Container:</h1>
+      <div class="form-header">
+        <h1>Dashborad</h1>
+        <p>Este é um texto provisório. Substitua-o pelo seu conteúdo real.</p>
+      </div>
       <FormMetric />
     </div>
   </div>
@@ -16,3 +19,13 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.form-header{
+  margin-bottom: 1.5rem;
+
+}
+.form-header > h1{
+  text-align: left;
+}
+</style>

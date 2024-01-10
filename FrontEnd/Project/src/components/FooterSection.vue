@@ -14,14 +14,16 @@ export default {
 <style>
 
 #footer {
-    height: 200px;
-    background-color:#222;
+    height: 50px;
+    background-color: #222;
     border-top: 4px solid #111;
     color: #fcba03;
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
+    position: fixed;
+    bottom: 0;
    
 }
 

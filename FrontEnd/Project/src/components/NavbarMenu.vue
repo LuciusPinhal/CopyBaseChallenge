@@ -14,30 +14,37 @@ export default {
  } 
 </script> 
 
-<style scoped> 
+<style scoped>
 #nav {
-background-color: #222;
-border-bottom: 4px solid #111;
-padding: 15px 50px;
-display: flex;
-justify-content: flex-end;
-align-items: center;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #222;
+    border-bottom: 4px solid #111;
+    padding: 15px 50px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    z-index: 1000;
 }
+
 #nav #logo-url {
     margin: auto;
     margin-left: 0;
 }
- #logo {
+
+#logo {
     width: 40px;
     height: 40px;
 }
 
-#nav a{
+#nav a {
     color: #FCBA03;
     text-decoration: none;
     margin: 12px;
-    transition: .5s;
+    transition: 0.5s;
 }
+
 #nav a:hover {
     color: #fff;
 }

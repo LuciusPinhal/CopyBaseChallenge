@@ -3,7 +3,6 @@
     <NavbarMenu /> 
     <router-view />
     <FooterSection />
-
   </div>
 </template>
 <script>
@@ -37,6 +36,7 @@ import FooterSection from "./components/FooterSection.vue";
 }
 
 .main-container {
+  margin-top: 120px !important;
   margin: 50px;
   min-height: 250px;
 }

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div  class="main-container">
         <Table v-if="tableData" class="table-container">
             <thead>
                 <tr>
