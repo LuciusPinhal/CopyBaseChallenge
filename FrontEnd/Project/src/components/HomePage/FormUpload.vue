@@ -84,9 +84,7 @@ export default {
             if (this.filelist.length > 0) {
                 const allowedExtensions = ['.xlsx', '.csv'];
                 const uploadedFileName = this.filelist[0].name.toLowerCase();
-
-                console.warn("🍷🗿 >> uploadedFileName:", uploadedFileName);
-
+                Mediator.notify(uploadedFileName, 'FileName');
 
                 if (allowedExtensions.some(extension => uploadedFileName.endsWith(extension))) {
                     const formData = new FormData();
@@ -99,8 +97,8 @@ export default {
                             Mediator.notify(this.validationextension, "screenStatus");
 
                             
-                            const ARR = response.data.arr;
-                            const MRR = response.data.mrr;
+                            const Arr = response.data.arr;
+                            const Mrr = response.data.mrr;
                             const ChurnRate = response.data.ChurnRate;
                             const ChurnRateAmonth = response.data.ChurnRateAmonth;
                             const statisticsAmonth = response.data.statisticsAmonth;
@@ -116,13 +114,11 @@ export default {
                             const ltvMonthly = response.data.ltvMonthly;
                             const ltvAnnual = response.data.ltvAnnual;
 
-                            Mediator.notify({ ARR, MRR, ChurnRate, ChurnRateAmonth, statisticsAmonth, resultGroupedPermonth,
+                            Mediator.notify({ Arr, Mrr, ChurnRate, ChurnRateAmonth, statisticsAmonth, resultGroupedPermonth,
                                 arpuMonthly, arpuAnnual, totalMonthlyRevenue, totalAnnualRevenue, totalUsers,
-                                ltvMonthly, ltvAnnual }, "test");
+                                ltvMonthly, ltvAnnual }, "AllStats");
                   
-                        
                     
-
                         })
                         .catch(error => {
                             this.msg = 'Erro na requisição:' + error;

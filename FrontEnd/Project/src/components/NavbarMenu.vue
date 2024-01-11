@@ -1,16 +1,41 @@
 <template> 
 <div id="nav" > 
-    <router-link to="/" id="logo-url"> 
-        <img :src="logo" :alt="alt" id="logo"> 
-     </router-link>
-      <router-link to="/">Home</router-link>|
-      <router-link to="/ListUserTable">ListUserTable</router-link> 
+    <div class="test">
+        <router-link to="/" id="logo-url"> 
+            <img :src="logo" :alt="alt" id="logo"> 
+        </router-link>
+        <router-link to="/">Home</router-link>|
+        <router-link to="/ListUserTable">ListUserTable</router-link> 
+
+    </div>
+    <div>
+        <div v-if="FileName">          
+            <a>{{ this.FileName }}</a> 
+        </div>
+        <div v-else>
+           <a>Importe os dados</a>
+        </div>
+    </div>
 </div> 
 </template> 
-<script> 
+<script>
+import Mediator from "../components/service/Mediator";
 export default { 
     name: "NavbarMenu",
-    props: ["logo", "alt"]
+    props: ["logo", "alt"],
+    data() {
+        return {
+            FileName: "",
+        }
+    },
+    created() {
+        Mediator.notify(this, "initNavbar");
+    },
+    methods: {
+        updateNavbar(data) {
+            this.FileName = data;
+        }
+    }
  } 
 </script> 
 
@@ -21,14 +46,16 @@ export default {
     width: 100%;
     background-color: #222;
     border-bottom: 4px solid #111;
-    padding: 15px 50px;
+    padding: 0px 50px;
     display: flex;
     justify-content: flex-end;
     align-items: center;
     z-index: 1000;
 }
 
-#nav #logo-url {
+#nav .test {
+    display: flex;
+    align-items: center;
     margin: auto;
     margin-left: 0;
 }

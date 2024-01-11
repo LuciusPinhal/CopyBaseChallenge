@@ -44,10 +44,9 @@ app.post('/api/stats', upload.single('file'), (req, res) => {
       const mrr = statistic.calculateMRR(sheetData);
       const arr = statistic.calculateARR(sheetData);
 
-      console.warn("🍷🗿 >> arr:", arr);
-
       const ChurnRate = statistic.calculateChurnRate(sheetData);
       const ChurnRateAmonth = statistic.calculateChurnAmonth(sheetData);
+
       const statisticsAmonth = statistic.getStatisticsUsersAmonth(sheetData);
       const resultGroupedPermonth = statistic.groupsubscriptionsAmonth(sheetData);
 
@@ -55,14 +54,14 @@ app.post('/api/stats', upload.single('file'), (req, res) => {
       const { ltvMonthly, ltvAnnual } = statistic.calculateLTV(sheetData);
 
 
-      console.log('ARPU Mensal:', arpuMonthly);
-      console.log('ARPU Anual:', arpuAnnual);
-      console.log('Receita Total Mensal:', totalMonthlyRevenue);
-      console.log('Receita Total Anual:', totalAnnualRevenue);
-      console.log('Número Total de Usuários:', totalUsers);
+      // console.log('ARPU Mensal:', arpuMonthly);
+      // console.log('ARPU Anual:', arpuAnnual);
+      // console.log('Receita Total Mensal:', totalMonthlyRevenue);
+      // console.log('Receita Total Anual:', totalAnnualRevenue);
+      // console.log('Número Total de Usuários:', totalUsers);
 
-      console.log('LTV Mensal:', ltvMonthly);
-      console.log('LTV Anual:', ltvAnnual);
+      // console.log('LTV Mensal:', ltvMonthly);
+      // console.log('LTV Anual:', ltvAnnual);
 
       // Object.keys(resultGroupedPermonth.UsersAmonth).forEach(month => {
       //   console.log(`Usuários em ${month}:`);
@@ -72,9 +71,9 @@ app.post('/api/stats', upload.single('file'), (req, res) => {
       //   console.log('\n'); // Adiciona uma line em branco para separar os meses
       // });
 
-      console.warn("🍷🗿 >> a:", ChurnRate);
-      console.warn("🍷🗿 >> b:", ChurnRateMes);
-      console.log('MRR Calculado:', mrr);
+      // console.warn("🍷🗿 >> a:", ChurnRate);
+      // console.warn("🍷🗿 >> b:", ChurnRateMes);
+      // console.log('MRR Calculado:', mrr);
 
       // Retorne os resultados em JSON
       res.json({

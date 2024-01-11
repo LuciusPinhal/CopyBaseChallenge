@@ -33,6 +33,7 @@
 </template>
 
 <script>
+import Mediator from "../service/Mediator";
 export default {
     data() {
         return {
@@ -42,18 +43,14 @@ export default {
         };
     },
     created() {
-        this.loadFromLocalStorage();
+        Mediator.notify(this, "initTable"); 
     },
     methods: {
-        loadFromLocalStorage() {
-            const dataAsString = localStorage.getItem('resultadoAgrupadoPorMes');
-
-            if (dataAsString) {
+        loadFromMediator(resultGroupedPermonth) {
+            if (resultGroupedPermonth) {
                 try {
-                    const parsedData = JSON.parse(dataAsString);
-
-                    if (parsedData && parsedData.UsersAmonth) {
-                        const usersAmonthArray = Object.values(parsedData.UsersAmonth).flat();
+                    if (resultGroupedPermonth && resultGroupedPermonth.UsersAmonth) {
+                        const usersAmonthArray = Object.values(resultGroupedPermonth.UsersAmonth).flat();
 
                         if (usersAmonthArray.length > 0) {
                             this.usersAmonth = usersAmonthArray;
@@ -63,16 +60,16 @@ export default {
                             this.tableData = false;
                         }
 
-                        console.log('Dados do localStorage carregados com sucesso:', this.usersAmonth);
+                        console.log('Dados carregados com sucesso:', this.usersAmonth);
                     } else {
-                        console.warn('Dados no formato esperado não encontrados no localStorage.');
+                        console.warn('Dados no formato esperado não encontrados');
                         this.tableData = false;
                     }
                 } catch (error) {
-                    console.error('Erro ao analisar os dados do localStorage:', error);
+                    console.error('Erro ao analisar os dados:', error);
                 }
             } else {
-                console.warn('Nenhum dado encontrado no localStorage.');
+                console.warn('Nenhum dado encontrado.');
             }
         },
     },

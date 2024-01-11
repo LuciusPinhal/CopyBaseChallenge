@@ -7,45 +7,93 @@ var Mediator = {
   },
 
   mainScreen: {},
+  mainTable: {},
+  initNavbar: {},
+
+  FileName: '',
+
   StatusScreen: false,
 
-  ARR,
-  MRR,
-  ChurnRate,
-  ChurnRateAmonth,
-  statisticsAmonth, 
+  Arr: 0,
+  Mrr: [],
+  ChurnRate: 0,
+  ChurnRateAmonth: 0,
+  statisticsAmonth: {}, 
   //ver quando carregar a tela se o mediator envia os dados
-  resultGroupedPermonth, 
-
-  arpuMonthly,
-  arpuAnnual, 
-  totalMonthlyRevenue,  
-  totalAnnualRevenue, 
-  totalUsers,  
-  ltvMonthly,  
-  ltvAnnual,  
+  resultGroupedPermonth: [], 
+  arpuMonthly: 0,
+  arpuAnnual: 0, 
+  totalMonthlyRevenue: 0,  
+  totalAnnualRevenue: 0, 
+  totalUsers: 0,  
+  ltvMonthly: 0,  
+  ltvAnnual: 0,  
 
 
 
   async notify(sender, event) {
-        switch (event) {
-            case "initHome":
-            this.mainScreen = sender
-            break
+    switch (event) {
+      case "initHome":
+        this.mainScreen = sender
+        //verificar status pagina
+        this.notify(this.StatusScreen, "screenStatus")
+        break
+      
+      case "initNavbar": 
+        this.initNavbar = sender;
+        break
+      
+      case "initTable":
+        this.mainTable = sender
+        this.notify(null, "PullDate")
+        break
+        
+      case "screenStatus": 
+        this.StatusScreen = sender
+        this.mainScreen.ValidationHeader(this.StatusScreen);
+        break
+    
+      case "AllStats": 
+        console.log('sender 1:>> ', sender.Arr);
+        console.log('sender 2:>> ', sender.Mrr);
+        console.log('sender 3:>> ', sender.ChurnRate);
+        console.log('sender 4:>> ', sender.ChurnRateAmonth);
+        console.log('sender 5:>> ', sender.statisticsAmonth);
+        this.statisticsAmonth = sender.statisticsAmonth;
 
-            case "screenStatus": 
-            this.StatusScreen = sender
-            this.mainScreen.ValidationHeader(this.StatusScreen);
-            break
-          
-            case "test": 
-            console.log('sender :>> ', sender);
-              console.log('sender :>> ', sender.resultGroupedPermonth);
-            break
+        console.warn("🍷🗿 >> this.statisticsAmonth: 5", this.statisticsAmonth);
 
-        }
+        console.log('sender 6:>> ', sender.arpuMonthly);
+        console.log('sender 7:>> ', sender.arpuAnnual);
+        console.log('sender 8:>> ', sender.totalMonthlyRevenue);
+        console.log('sender 9:>> ', sender.totalAnnualRevenue);
 
+        console.log('sender 10:>> ', sender.totalUsers);
+        console.log('sender 11:>> ', sender.ltvMonthly);
+        console.log('sender 12:>> ', sender.ltvAnnual);
+ 
+
+      //  Mediator.notify({ ARR, MRR, ChurnRate, ChurnRateAmonth, statisticsAmonth, resultGroupedPermonth,
+      //                           arpuMonthly, arpuAnnual, totalMonthlyRevenue, totalAnnualRevenue, totalUsers,
+      //                           ltvMonthly, ltvAnnual }, "AllStats");
+         
+        this.resultGroupedPermonth = sender.resultGroupedPermonth
+        break
+      
+     
+      case "FileName": 
+        console.log('sender :>> ', sender);
+        this.FileName = sender;
+        this.initNavbar.updateNavbar(this.FileName);
+        break
+       
+      case "PullDate":
+        this.mainTable.loadFromMediator(this.resultGroupedPermonth)
+        break
+    
     }
+
+  }
 
 }
 
