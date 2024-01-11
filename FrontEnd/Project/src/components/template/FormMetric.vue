@@ -1,6 +1,6 @@
 <template>
   <div v-if="validationextension">
-  <div>gay</div>
+  <div>teste</div>
   </div> 
   <div class="form-file" v-else>
     <FormUploadVue/>
@@ -26,7 +26,7 @@ export default {
 
   },
     created() {
-      Mediator.notify(this, "init");
+      Mediator.notify(this, "initHome");
     },
   };
 </script>

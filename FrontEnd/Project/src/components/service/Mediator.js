@@ -9,10 +9,27 @@ var Mediator = {
   mainScreen: {},
   StatusScreen: false,
 
+  ARR,
+  MRR,
+  ChurnRate,
+  ChurnRateAmonth,
+  statisticsAmonth, 
+  //ver quando carregar a tela se o mediator envia os dados
+  resultGroupedPermonth, 
+
+  arpuMonthly,
+  arpuAnnual, 
+  totalMonthlyRevenue,  
+  totalAnnualRevenue, 
+  totalUsers,  
+  ltvMonthly,  
+  ltvAnnual,  
+
+
 
   async notify(sender, event) {
         switch (event) {
-            case "init":
+            case "initHome":
             this.mainScreen = sender
             break
 
