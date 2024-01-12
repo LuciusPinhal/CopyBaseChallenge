@@ -81,8 +81,10 @@ export default {
             if (!event.currentTarget.classList.contains('bg-green-300')) {
                 event.currentTarget.classList.remove('bg-gray-100');
                 event.currentTarget.classList.add('bg-green-300');
+                
             }
         },
+
         dragleave(event) {
             event.preventDefault();
             event.currentTarget.classList.add('bg-gray-100');
