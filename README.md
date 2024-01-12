@@ -6,7 +6,7 @@
 
 ### Protótipo no Figma  👨‍🎨🎨
 
-Confira o protótipo do projeto no [Figma](https://www.figma.com/proto/fpkhBGEIEX3IyuhnY5qGhP/Desafio?type=design&node-id=102-809&t=rryDboLC41KNSwiL-1&scaling=contain&page-id=102%3A628&mode=design).
+Confira o protótipo do projeto no [Figma](https://www.figma.com/proto/fpkhBGEIEX3IyuhnY5qGhP/Desafio?type=design&node-id=109-948&t=AAXw9kB2EL13OvUW-0&scaling=contain&page-id=102%3A628).
 
 &nbsp;
 
