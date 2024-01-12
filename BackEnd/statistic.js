@@ -258,7 +258,7 @@ function calculateMRR(data) {
       const mrrValue = line.periodicidade === 'Anual' ? valueNumeric / 12 : valueNumeric;
       mrr[month] += mrrValue;
     } else {
-      console.error('Valor inválido:', line.valor);
+      console.error('Valor inválido :', line.valor);
     }
   });
   

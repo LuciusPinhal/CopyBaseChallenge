@@ -199,8 +199,9 @@ const testdata = [
         'data cancelamento': 44578.02394675926,
         valor: 367.12,
         'próximo ciclo': 44603,
-        'ID assinante': 'user_3023'
+        'ID assinante': 'user_3024'
     },
+
     {
         periodicidade: 'Anual',
         'quantidade cobranças': 1,

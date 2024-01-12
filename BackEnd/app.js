@@ -38,7 +38,7 @@ app.post('/api/stats', upload.single('file'), (req, res) => {
         }
       });
 
-      // Calculos
+      // all calculos
       const mrr = statistic.calculateMRR(sheetData);
       const arr = statistic.calculateARR(sheetData);
 
