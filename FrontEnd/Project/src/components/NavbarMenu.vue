@@ -1,41 +1,27 @@
 <template> 
 <div id="nav" > 
-    <div class="test">
+    <div class="formNav">
         <router-link to="/" id="logo-url"> 
             <img :src="logo" :alt="alt" id="logo"> 
         </router-link>
-        <router-link to="/">Home</router-link>|
-        <router-link to="/ListUserTable">ListUserTable</router-link> 
-
     </div>
     <div>
-        <div v-if="FileName">          
-            <a>{{ this.FileName }}</a> 
-        </div>
-        <div v-else>
-           <a>Importe os dados</a>
-        </div>
+        <router-link to="/">Home</router-link><span>|</span>
+        <router-link to="/ListUserTable">Table</router-link> 
     </div>
 </div> 
 </template> 
 <script>
-import Mediator from "../components/service/Mediator";
+
 export default { 
     name: "NavbarMenu",
     props: ["logo", "alt"],
     data() {
         return {
-            FileName: "",
+           
         }
     },
-    created() {
-        Mediator.notify(this, "initNavbar");
-    },
-    methods: {
-        updateNavbar(data) {
-            this.FileName = data;
-        }
-    }
+   
  } 
 </script> 
 
@@ -44,16 +30,16 @@ export default {
     position: fixed;
     top: 0;
     width: 100%;
-    background-color: #222;
-    border-bottom: 4px solid #111;
-    padding: 0px 50px;
+    background-color: #EFE9F4;
+    /* border-bottom: 2px solid #3F287A; */
+    padding: 0px 10px;
     display: flex;
     justify-content: flex-end;
     align-items: center;
     z-index: 1000;
 }
 
-#nav .test {
+#nav .formNav {
     display: flex;
     align-items: center;
     margin: auto;
@@ -61,18 +47,22 @@ export default {
 }
 
 #logo {
-    width: 40px;
+    width: 155px;
     height: 40px;
 }
 
-#nav a {
-    color: #FCBA03;
+#nav a,
+.fileName p {
+    color: #3F287A;
     text-decoration: none;
     margin: 12px;
     transition: 0.5s;
 }
-
-#nav a:hover {
-    color: #fff;
+#nav span {
+    color: #3F287A;   
 }
+#nav a:hover {  
+    text-decoration: underline;
+}
+
 </style>

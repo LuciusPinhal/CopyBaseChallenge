@@ -1,6 +1,6 @@
 <template>
   <div v-if="validationextension">
-  <div>teste</div>
+     <FormGraphs/>
   </div> 
   <div class="form-file" v-else>
     <FormUploadVue/>
@@ -9,7 +9,8 @@
 
 <script>
 import Mediator from "../service/Mediator";
-import FormUploadVue from '../HomePage/FormUpload.vue';
+import FormUploadVue from './FormUpload.vue';
+import FormGraphs from '../Dashboard/FormGraphs.vue'
 export default {
     data() {
       return {
@@ -17,7 +18,8 @@ export default {
       };
     },
     components: {
-      FormUploadVue
+      FormUploadVue,
+      FormGraphs
     },
   methods: {   
     ValidationHeader(validation) {

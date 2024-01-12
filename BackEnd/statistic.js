@@ -3,7 +3,6 @@ const months = [
 ];
 
 function calculateChurnRate(data) {
-
     const datesLatestBySubscriber = {};
 
     data.forEach(line => {
@@ -14,7 +13,7 @@ function calculateChurnRate(data) {
         const dateMostRecent = new Date(Math.max(dataStatus, dataCanceled));
 
         if (!datesLatestBySubscriber[idSubscriber] || datesLatestBySubscriber[idSubscriber] < dateMostRecent) {
-        datesLatestBySubscriber[idSubscriber] = dateMostRecent;
+            datesLatestBySubscriber[idSubscriber] = dateMostRecent;
         }
     });
 
@@ -22,7 +21,6 @@ function calculateChurnRate(data) {
         line.status === 'Cancelada' &&
         new Date(line['data cancelamento']) && new Date(line['data cancelamento']).getTime() === datesLatestBySubscriber[line['ID assinante']].getTime()
     );
-
 
     const activeSubscriptionsHome = data.filter(line =>
         line.status === 'Ativa' &&
@@ -32,7 +30,7 @@ function calculateChurnRate(data) {
     const numberTotalSubscribersHome = activeSubscriptionsHome.length;
 
     const churnRate = numberTotalSubscribersHome > 0
-        ? (subscriptionsCanceled.length / numberTotalSubscribersHome) * 100
+        ? parseFloat((subscriptionsCanceled.length / numberTotalSubscribersHome * 100).toFixed(2))
         : 0;
 
     return churnRate;
@@ -147,7 +145,6 @@ function groupsubscriptionsAmonth(data) {
 }
 
 function getStatisticsUsersAmonth(data) {
-
     const statisticsAmonth = {};
     
     months.forEach(month => {
@@ -237,27 +234,49 @@ function calculateARPU(data) {
 }
 
 function calculateMRR(data) {
-    const currentDate = new Date();
+  const currentDate = new Date();
 
-    const assinaturasAtivas = data.filter(line =>
-        line.status === 'Ativa' &&
-        (!line['data cancelamento'] || new Date(line['data cancelamento']) > currentDate) &&
-        new Date(line['data início']) <= currentDate
-    );
+  const assinaturasAtivas = data.filter(line =>
+    line.status === 'Ativa' &&
+    (!line['data cancelamento'] || new Date(line['data cancelamento']) > currentDate) &&
+    new Date(line['data início']) <= currentDate
+  );
 
-    const mrr = assinaturasAtivas.map(line => {
-        const valueNumeric = parseFloat(String(line.valor).replace(',', '.'));
+  const mrr = {};
 
-        if (!isNaN(valueNumeric)) {
-            return line.periodicidade === 'Anual' ? valueNumeric / 12 : valueNumeric;
-        } else {  
-            console.error('Valor inválido:', line.valor);
-            return 0;
-        }
-    });
+  assinaturasAtivas.forEach(line => {
+    const valueNumeric = parseFloat(String(line.valor).replace(',', '.'));
 
-    return mrr;
+    if (!isNaN(valueNumeric)) {
+      const monthIndex = new Date(line['data início']).getMonth();
+      const month = months[monthIndex];
+
+      if (!mrr[month]) {
+        mrr[month] = 0;
+      }
+
+      const mrrValue = line.periodicidade === 'Anual' ? valueNumeric / 12 : valueNumeric;
+      mrr[month] += mrrValue;
+    } else {
+      console.error('Valor inválido:', line.valor);
+    }
+  });
+  
+  return mrr;
 }
+
+function calculateassinaturas(data) {
+
+   const currentDate = new Date();
+
+  const assinaturasAtivas = data.filter(line =>
+    line.status === 'Ativa' &&
+    (!line['data cancelamento'] || new Date(line['data cancelamento']) > currentDate) &&
+    new Date(line['data início']) <= currentDate
+  );
+    return assinaturasAtivas
+}
+
 
 function calculateARR(data) {
     const currentDate = new Date();
@@ -271,7 +290,7 @@ function calculateARR(data) {
     const totalAnnualRevenue = calculateTotalAnnualRevenue(assinaturasAtivas);
     const totalUsers = calculateTotalUsers(assinaturasAtivas);
 
-    const arr = totalUsers > 0 ? totalAnnualRevenue / totalUsers : 0;
+    const arr = totalUsers > 0 ? +(totalAnnualRevenue / totalUsers).toFixed(2) : 0;
 
     return arr;
 }
@@ -295,6 +314,7 @@ module.exports = {
     calculateARPU,
     calculateARR,
     calculateLTV,
+    calculateassinaturas,
     calculateMRR
 
 };

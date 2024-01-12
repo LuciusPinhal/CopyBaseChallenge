@@ -1,5 +1,5 @@
 {
-  "name": "desafio-copybase",
+  "name": "MetricsExplorer",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,9 +9,16 @@
   },
   "dependencies": {
     "axios": "^1.6.5",
+    "bootstrap": "^5.3.2",
+    "bootstrap-table": "^1.22.2",
+    "bootstrap-vue": "^2.23.1",
+    "chart.js": "^2.9.4",
     "core-js": "^3.8.3",
+    "date-fns": "^3.2.0",
+    "jquery": "^3.7.1",
     "vue": "^3.2.13",
-    "vue-router": "^4.2.5"
+    "vue-router": "^4.2.5",
+    "vuetify": "^3.4.10"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",

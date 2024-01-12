@@ -1,6 +1,6 @@
 <template>
     <footer id="footer">
-        <p>Make Your Burger &copy; 2022</p>
+        <p>Desafio CopyBase &copy; 2024</p>
     </footer>
 </template>
 
@@ -15,9 +15,9 @@ export default {
 
 #footer {
     height: 50px;
-    background-color: #222;
-    border-top: 4px solid #111;
-    color: #fcba03;
+    background-color: #EFE9F4;
+    /* border-top: 2px solid #3F287A; */
+    color: #3F287A;
     display: flex;
     align-items: center;
     justify-content: center;

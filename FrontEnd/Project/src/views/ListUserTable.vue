@@ -2,8 +2,8 @@
     <div>
         <div class="main-container">
             <div class="form-header">
-                <h1>Dashboard</h1>
-                <p>Este é um texto provisório. Substitua-o pelo seu conteúdo real.</p>
+                <h1>Table</h1>
+                <p>Detalhamento de usuários referente a planilha</p>
             </div>
             <TableUser />
         </div>

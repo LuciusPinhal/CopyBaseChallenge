@@ -6,7 +6,7 @@
   </div>
 </template>
 <script>
- import NavbarMenu from "./components/NavbarMenu.vue";
+import NavbarMenu from "./components/NavbarMenu.vue";
 import FooterSection from "./components/FooterSection.vue";
 
  export default {
@@ -17,7 +17,7 @@ import FooterSection from "./components/FooterSection.vue";
   },
   data() {
     return {
-      logo_src: require('@/Img/CopyBase.jpg'),
+      logo_src: require('@/Img/logo.png'),
       app_name: "Make Your Burger"
     }
   }
@@ -36,15 +36,15 @@ import FooterSection from "./components/FooterSection.vue";
 }
 
 .main-container {
-  margin-top: 120px !important;
-  margin: 50px;
+  margin-top: 95px !important;
+  margin: 24px;
   min-height: 250px;
 }
 
 h1 {
   text-align: center;
-  font-size: 42px;
-  margin-bottom: 30px;
+  font-size: 32px;
+  margin-bottom: 10px;
   color: #222;
 
 }
