@@ -1,10 +1,12 @@
-# <img src="https://github.com/LuciusPinhal/Desafio_CopyBase/assets/106531308/938ea917-ff84-4aa1-ac26-1ffcfe71ce79" alt="CopyBase" style="width: 100%px; height: 200px;"> <br> Desafio CopyBase 
+# <img src="https://github.com/LuciusPinhal/Desafio_CopyBase/assets/106531308/69def385-3855-4704-a0eb-9824fb2013b4" alt="CopyBase" style="width: 100%px; height: 200px;"> <br> <br> Desafio CopyBase 
+
+
 &nbsp;&nbsp;&nbsp;
 
 
 ### Protótipo no Figma  👨‍🎨🎨
 
-Confira o protótipo do projeto no [Figma](https://www.figma.com/exemplo-do-seu-prototipo).
+Confira o protótipo do projeto no [Figma](https://www.figma.com/proto/fpkhBGEIEX3IyuhnY5qGhP/Desafio?type=design&node-id=109-948&t=AAXw9kB2EL13OvUW-0&scaling=contain&page-id=102%3A628).
 
 &nbsp;
 
@@ -13,7 +15,21 @@ Confira o protótipo do projeto no [Figma](https://www.figma.com/exemplo-do-seu-
 &nbsp;&nbsp;
 
 
-## 🚀 Iniciando o Back-End (Node.js)
+# Instruções de Execução
+
+## 1. 🧑‍💻 Clone o repositório.
+&nbsp;
+   
+* Abra o terminal na pasta desejada e insira o seguinte comando para clonar o repositório:
+ ```bash
+https://github.com/LuciusPinhal/Desafio_CopyBase.git
+```
+&nbsp;
+
+## 2. ⚙️ Instale as dependências.
+&nbsp;
+
+### 🚀 Back-End (Node.js)
 
 * Abra o terminal e navegue até o diretório onde está o arquivo app.js na pasta BackEnd:
  ```bash
@@ -29,29 +45,25 @@ npm install
 
 💡 Este comando irá instalar as bibliotecas necessárias, como o Express e o Multer, que são especificadas no arquivo package.json.
 
+&nbsp;
 
+
+### 🧪 Tests (Jest.js)
+
+* No mesmo diretório onde está pasta BackEnd execute os seguintes comandos:
+ ```bash
+ npm install --save-dev jest
+```
 &nbsp;&nbsp;
 
-
-* Agora, execute o servidor usando o seguinte comando:
-```bash
-node app.js
+* Agora você pode executar seus testes usando o comando:
+ ```bash
+npm test
 ```
 &nbsp;&nbsp;
 
 
-💡 Isso iniciará o servidor Node.js e estará escutando na porta que você especificou (no exemplo, está configurado para a porta 3000). Se tudo estiver correto, você verá a mensagem "Servidor rodando em http://localhost:3000" no terminal.
-&nbsp;&nbsp;
-
-
-O servidor agora está pronto para aceitar solicitações 🦾🤖.
-
-&nbsp;&nbsp;
-
-## 🚀 Iniciando o Front-End (Vue.js)
-Lembre-se de que, para testar a funcionalidade completa da aplicação, o Front-End (Vue.js) também precisa estar em execução. 
-&nbsp;&nbsp;
-
+### 🚀 Front-End (Vue.js)
 
  * Navegue até o diretório do projeto Vue.js:
  ```bash
@@ -63,6 +75,42 @@ Lembre-se de que, para testar a funcionalidade completa da aplicação, o Front-
 * Instale as dependências do projeto:
 ```bash
 npm install
+```
+&nbsp;&nbsp;
+
+
+
+## 3. 🌐 Execute do servidor Front-End e Back-End.
+
+
+### 🚀 Iniciando o Back-End (Node.js)
+
+&nbsp;&nbsp;
+
+* no diretorio do BackEnd, execute o servidor usando o seguinte comando:
+```bash
+node app.js
+```
+&nbsp;&nbsp;
+
+💡 Isso iniciará o servidor Node.js e estará escutando na porta que você especificou (no exemplo, está configurado para a porta 3000). Se tudo estiver correto, você verá a mensagem "Servidor rodando em http://localhost:3000" no terminal.
+&nbsp;&nbsp;
+
+
+O servidor agora está pronto para aceitar solicitações 🦾🤖.
+&nbsp;
+
+### 🚀 Iniciando o Front-End (Vue.js)
+&nbsp;&nbsp;
+
+
+Lembre-se de que, para testar a funcionalidade completa da aplicação, o Front-End (Vue.js) também precisa estar em execução. 
+&nbsp;&nbsp;
+
+
+ * Navegue até o diretório do projeto Vue.js:
+ ```bash
+ cd FrontEnd/Project
 ```
 &nbsp;&nbsp;
 
