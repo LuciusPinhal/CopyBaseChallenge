@@ -4,6 +4,11 @@
 &nbsp;&nbsp;&nbsp;
 
 
+https://github.com/user-attachments/assets/4047b101-3d41-4e64-a4e8-c079e3884c6f
+
+
+&nbsp;&nbsp;
+
 ### Protótipo no Figma  👨‍🎨🎨
 
 Confira o protótipo do projeto no [Figma](https://www.figma.com/proto/fpkhBGEIEX3IyuhnY5qGhP/Desafio?type=design&node-id=109-948&t=AAXw9kB2EL13OvUW-0&scaling=contain&page-id=102%3A628).
